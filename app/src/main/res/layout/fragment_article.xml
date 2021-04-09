@@ -4,13 +4,8 @@
     android:layout_height="match_parent"
     >
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="121dp"
-        android:layout_height="85dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="294dp"
-        android:text="FAVORITE FRAGMENT"
-        android:textSize="36sp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>
