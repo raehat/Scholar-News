@@ -14,6 +14,7 @@ public class EditorPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor_page);
 
+        /*hey*/
         @SuppressLint("WrongConstant") SharedPreferences sh
                 = getSharedPreferences("MySharedPref", MODE_APPEND);
         SharedPreferences.Editor myEdit
