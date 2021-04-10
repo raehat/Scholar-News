@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     >
 
-    <TextView
+    <EditText
         android:id="@+id/textView9"
         android:layout_width="318dp"
         android:layout_height="197dp"
