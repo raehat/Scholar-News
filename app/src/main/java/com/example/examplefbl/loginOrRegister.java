@@ -21,7 +21,6 @@ public class loginOrRegister extends AppCompatActivity {
 
         getSupportActionBar().hide();
         SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
-        FirebaseAuth.getInstance().signOut();
         if (FirebaseAuth.getInstance().getCurrentUser()!=null)
         {
             Intent intent= new Intent(getApplicationContext(), afterLogin.class);

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,12 +21,14 @@ public class afterLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_afterlogin);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        /*overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);*/
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation_user);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         getSupportActionBar().setTitle("SCHOLAR NEWS");
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_user,new UserHomeFragment()).commit();
+
+
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
