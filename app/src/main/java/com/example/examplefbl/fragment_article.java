@@ -1,10 +1,13 @@
 package com.example.examplefbl;
 
 
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,13 +15,27 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.w3c.dom.Document;
+
 import java.util.ArrayList;
 
 import adapter.RecyclerViewAdapter;
 
+import static android.os.ParcelFileDescriptor.MODE_APPEND;
+
 public class fragment_article extends Fragment {
     RecyclerView recyclerview;
     ArrayList<datamodel> dataholder;
+    FirebaseFirestore fstore;
+    MyRecyclerViewAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,8 +44,29 @@ public class fragment_article extends Fragment {
         recyclerview=view.findViewById(R.id.recyclerView);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         dataholder = new ArrayList<>();
+        fstore= FirebaseFirestore.getInstance();
 
-        datamodel ob1=new datamodel(R.drawable.testimg,"Angular","Web Application");
+        @SuppressLint("WrongConstant") SharedPreferences sh
+                = getActivity().getSharedPreferences("MySharedPref", MODE_APPEND);
+        final String userr = sh.getString("username", "");
+        fstore.collection("articles" + userr)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot querySnapshot: task.getResult())
+                        {
+                            datamodel obj= new datamodel(R.drawable.testimg,querySnapshot.getString("heading"),querySnapshot.getString("article"), querySnapshot.getString("imageCode"));
+                            dataholder.add((obj));
+                        }
+
+                        adapter= new MyRecyclerViewAdapter(getContext(), dataholder);
+                        recyclerview.setAdapter(adapter);
+                    }
+                });
+
+
+        /*datamodel ob1=new datamodel(R.drawable.testimg,"Angular","Web Application");
         dataholder.add(ob1);
 
         datamodel ob2=new datamodel(R.drawable.testimg,"C Programming","Embed Programming");
@@ -56,9 +94,7 @@ public class fragment_article extends Fragment {
         dataholder.add(ob9);
 
         datamodel ob10=new datamodel(R.drawable.testimg,"Wordpress","WebApplication Framewrok");
-        dataholder.add(ob10);
-
-        recyclerview.setAdapter(new RecyclerViewAdapter(dataholder));
+        dataholder.add(ob10);*/
 
         return view;
     }

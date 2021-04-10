@@ -5,20 +5,7 @@
     android:id="@+id/kk"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/round"
     tools:context=".afterLogin">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager5"
-        android:layout_width="304dp"
-        android:layout_height="260dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginRight="11dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.547"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
