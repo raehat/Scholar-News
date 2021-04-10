@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+
+    <ScrollView
+        android:id="@+id/scr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="120dp">
+
+            <TextView
+                android:id="@+id/tran2"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="50dp"
+                android:paddingLeft="30dp"
+                android:paddingTop="14dp"
+                android:paddingRight="30dp"
+                android:shadowColor="#FFFFFF"
+                android:text="Write an article you want to"
+                android:textColor="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="353dp"
+                android:layout_height="259dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="150dp"
+                android:src="@drawable/buy" />
+
+            <EditText
+                android:id="@+id/article"
+                android:layout_width="300dp"
+                android:layout_height="220dp"
+                android:layout_below="@id/heading"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:ems="10"
+                android:hint="Enter article!!!"
+                android:textColor="#ffffff"
+                android:textColorHint="#FFFFFF"
+                android:backgroundTint="#ffffff"/>
+
+            <EditText
+                android:id="@+id/heading"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/imageView3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:ems="10"
+                android:hint="Enter heading"
+                android:inputType="textPersonName"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:backgroundTint="#ffffff"/>
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:paddingLeft="10dp"
+                android:text="LOCALITY"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/uid"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:paddingLeft="30dp"
+                android:text="LOCALITY"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_below="@+id/article"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"></TextView>
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="79dp"
+        android:layout_marginTop="555dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#000000">
+            <Button
+                android:id="@+id/submit_article"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:background="@drawable/round2"
+                android:text="SUBMIT"
+                android:textColor="#ffffff" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

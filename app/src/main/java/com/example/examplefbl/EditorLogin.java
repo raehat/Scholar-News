@@ -24,6 +24,7 @@ public class EditorLogin extends AppCompatActivity {
     EditText password;
     Button loginEditor;
     FirebaseFirestore fstore;
+    public static String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class EditorLogin extends AppCompatActivity {
         loginEditor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                user= username.getText().toString();
                 DocumentReference documentReference= fstore.collection("editors").document(username.getText().toString());
                 documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
