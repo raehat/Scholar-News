@@ -4,12 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -19,6 +28,7 @@ import adapter.RecyclerViewAdapter_usersaved;
 public class UserSavedFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<datamodel_userSaved> dataholder_userSaved;
+    FirebaseFirestore fstore;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,7 +37,39 @@ public class UserSavedFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         dataholder_userSaved = new ArrayList<>();
 
-        datamodel_userSaved ob1=new datamodel_userSaved(R.drawable.testimg,"Angular","Web Application");
+        fstore= FirebaseFirestore.getInstance();
+
+        fstore.collection(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (DocumentSnapshot querySnapshot: task.getResult())
+                {
+                    Toast.makeText(getContext(), "" + querySnapshot.getString("code"), Toast.LENGTH_SHORT).show();
+                    fstore.collection("articles")
+                            .document(querySnapshot.getString("code"))
+                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            Toast.makeText(getContext(), "" + documentSnapshot.getString("heading"), Toast.LENGTH_SHORT).show();
+                            datamodel_userSaved obj= new datamodel_userSaved(
+                                    documentSnapshot.getString("imageCode"),
+                                    documentSnapshot.getString("heading"),
+                                    documentSnapshot.getString("article")
+                            );
+                            dataholder_userSaved.add(obj);
+
+                            Toast.makeText(getContext(), "" + dataholder_userSaved.size(), Toast.LENGTH_SHORT).show();
+                            setAdapt();
+                        }
+                    });
+                }
+
+            }
+
+        });
+
+        /*datamodel_userSaved ob1=new datamodel_userSaved(R.drawable.testimg,"Angular","Web Application");
         dataholder_userSaved.add(ob1);
 
         datamodel_userSaved ob2=new datamodel_userSaved(R.drawable.testimg,"C Programming","Embed Programming");
@@ -55,9 +97,19 @@ public class UserSavedFragment extends Fragment {
         dataholder_userSaved.add(ob9);
 
         datamodel_userSaved ob10=new datamodel_userSaved(R.drawable.testimg,"Wordpress","WebApplication Framewrok");
-        dataholder_userSaved.add(ob10);
+        dataholder_userSaved.add(ob10);*/
 
-        recyclerView.setAdapter(new RecyclerViewAdapter_usersaved(dataholder_userSaved));
+        /*datamodel_userSaved obj= new datamodel_userSaved(
+                "a",
+                "b",
+                "c");
+        dataholder_userSaved.add(obj);
+        recyclerView.setAdapter(new RecyclerViewAdapter_usersaved(dataholder_userSaved));*/
+
         return view;
+    }
+
+    private void setAdapt() {
+        recyclerView.setAdapter(new RecyclerViewAdapter_usersaved(dataholder_userSaved));
     }
 }

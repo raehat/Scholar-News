@@ -72,6 +72,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 int temp= new Random().nextInt(999999);
+                DocumentReference documentReference1= fstore.collection("articles").document(String.valueOf(temp));
                 DocumentReference documentReference= fstore.collection("articles" + userr).document(String.valueOf(temp));
                 Map<String, Object> object= new HashMap<>();
                 object.put("article", article.getText().toString());
@@ -81,6 +82,8 @@ public class HomeFragment extends Fragment {
                     object.put("imageCode", String.valueOf(temp));
                 }
 
+
+                documentReference1.set(object);
                 documentReference.set(object);
             }
         });
@@ -140,7 +143,7 @@ public class HomeFragment extends Fragment {
 
     private void choosePicture() {
         CropImage.activity()
-                .setAspectRatio(259, 259)
+                .setAspectRatio(414, 736)
                 .start(getContext(), this);
     }
 }

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -49,6 +50,7 @@ public class fragment_article extends Fragment {
         @SuppressLint("WrongConstant") SharedPreferences sh
                 = getActivity().getSharedPreferences("MySharedPref", MODE_APPEND);
         final String userr = sh.getString("username", "");
+        CollectionReference documentReference= fstore.collection("articles" + userr);
         fstore.collection("articles" + userr)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

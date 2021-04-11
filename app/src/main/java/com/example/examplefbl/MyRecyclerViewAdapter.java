@@ -63,6 +63,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<ProductViewModel
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "delete", Toast.LENGTH_SHORT).show();
+
+                fstore.collection("articles").document("" + imageAdd).delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(context, "HIUIII", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                 fstore.collection("articles" + userr).document("" + imageAdd).delete()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

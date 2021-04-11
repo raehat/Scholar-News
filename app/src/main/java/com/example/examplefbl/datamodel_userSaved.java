@@ -1,20 +1,20 @@
 package com.example.examplefbl;
 
 public class datamodel_userSaved {
-    int image;
+    String image;
     String header,desc;
 
-    public datamodel_userSaved(int image, String header, String desc) {
+    public datamodel_userSaved(String image, String header, String desc) {
         this.image = image;
         this.header = header;
         this.desc = desc;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
