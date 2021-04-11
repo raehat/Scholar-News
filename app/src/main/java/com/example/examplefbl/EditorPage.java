@@ -51,7 +51,6 @@ public class EditorPage extends AppCompatActivity {
                 Integer.parseInt(
                         String.valueOf(1)));
         myEdit.commit();
-        Toast.makeText(this, "" + sh.getString("username", "lll"), Toast.LENGTH_SHORT).show();
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {

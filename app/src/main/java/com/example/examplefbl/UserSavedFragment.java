@@ -45,13 +45,11 @@ public class UserSavedFragment extends Fragment {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (DocumentSnapshot querySnapshot: task.getResult())
                 {
-                    Toast.makeText(getContext(), "" + querySnapshot.getString("code"), Toast.LENGTH_SHORT).show();
                     fstore.collection("articles")
                             .document(querySnapshot.getString("code"))
                             .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            Toast.makeText(getContext(), "" + documentSnapshot.getString("heading"), Toast.LENGTH_SHORT).show();
                             datamodel_userSaved obj= new datamodel_userSaved(
                                     documentSnapshot.getString("imageCode"),
                                     documentSnapshot.getString("heading"),
@@ -59,7 +57,6 @@ public class UserSavedFragment extends Fragment {
                             );
                             dataholder_userSaved.add(obj);
 
-                            Toast.makeText(getContext(), "" + dataholder_userSaved.size(), Toast.LENGTH_SHORT).show();
                             setAdapt();
                         }
                     });

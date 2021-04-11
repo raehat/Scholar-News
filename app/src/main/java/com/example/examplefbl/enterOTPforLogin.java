@@ -1,5 +1,6 @@
 package com.example.examplefbl;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,12 +30,14 @@ public class enterOTPforLogin extends AppCompatActivity {
     String phone1;
     PinView kk;
     FirebaseAuth mAuth;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enterotp);
 
+        getSupportActionBar().hide();
         phone1= getIntent().getExtras().getString("number");
         kk= (PinView) findViewById(R.id.kk);
         mAuth= FirebaseAuth.getInstance();
@@ -102,7 +105,6 @@ public class enterOTPforLogin extends AppCompatActivity {
 
 
         String phone = phone1;
-        Toast.makeText(this, "" + phone, Toast.LENGTH_SHORT).show();
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phone,        // Phone number to verify
@@ -132,7 +134,6 @@ public class enterOTPforLogin extends AppCompatActivity {
 
             codeSent = s;
             Toast.makeText(enterOTPforLogin.this, "" + codeSent, Toast.LENGTH_SHORT).show();
-
         }
     };
 

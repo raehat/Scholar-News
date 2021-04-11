@@ -23,8 +23,8 @@ public class login extends AppCompatActivity {
         button= (Button) findViewById(R.id.button);
         editText2= (EditText) findViewById(R.id.editText);
         ccp= (CountryCodePicker) findViewById(R.id.countryCodePicker);
-        
 
+        getSupportActionBar().hide();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

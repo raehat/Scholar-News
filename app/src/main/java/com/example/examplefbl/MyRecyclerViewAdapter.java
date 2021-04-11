@@ -99,7 +99,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<ProductViewModel
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                         Bitmap bitmap= BitmapFactory.decodeFile(finalLocalFile.getAbsolutePath());
-                        Toast.makeText(context, "" + imageAdd, Toast.LENGTH_SHORT).show();
                         holder.imageView.setImageBitmap(bitmap);
                         holder.progressBar.setVisibility(View.GONE);
                     }

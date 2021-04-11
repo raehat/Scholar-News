@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
@@ -40,14 +42,18 @@ public class enterOTP extends AppCompatActivity {
     FirebaseAuth mAuth;
     private String userID;
     String codeSent;
+    ProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enterotp);
 
+        getSupportActionBar().hide();
         fstore= FirebaseFirestore.getInstance();
         mAuth=FirebaseAuth.getInstance();
+        progressBar= new ProgressDialog(getApplicationContext());
+        progressBar.setTitle("Just a moment..");
 
         phoneTemp= getIntent().getExtras().getString("temp");
         name= getIntent().getExtras().getString("name");
@@ -72,6 +78,7 @@ public class enterOTP extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.show();
                 verifySignInCode();
             }
         });
@@ -106,6 +113,7 @@ public class enterOTP extends AppCompatActivity {
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
+                                    progressBar.hide();
                                     Toast.makeText(enterOTP.this, "User profile created", Toast.LENGTH_SHORT)
                                             .show();
                                 }
@@ -119,6 +127,7 @@ public class enterOTP extends AppCompatActivity {
 
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                progressBar.hide();
                                 Toast.makeText(getApplicationContext(),
                                         "Incorrect Verification Code ", Toast.LENGTH_LONG).show();
                             }
@@ -127,6 +136,7 @@ public class enterOTP extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressBar.hide();
                 Toast.makeText(enterOTP.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -31,6 +31,8 @@ public class EditorLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor_login);
 
+        getSupportActionBar().setTitle("LOGIN AS EDITOR");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         username= findViewById(R.id.username);
         password= findViewById(R.id.password);
         loginEditor= findViewById(R.id.login_editor);

@@ -32,6 +32,7 @@ public class createAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        getSupportActionBar().hide();
         Button button3 = findViewById(R.id.button3);
         name= findViewById(R.id.name);
         email= findViewById(R.id.email);

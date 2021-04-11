@@ -23,6 +23,7 @@ public class afterLogin extends AppCompatActivity {
         setContentView(R.layout.activity_afterlogin);
         /*overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);*/
 
+        getSupportActionBar().hide();
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation_user);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
