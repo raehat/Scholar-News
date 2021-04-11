@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,6 +42,9 @@ public class EditorLogin extends AppCompatActivity {
         loginEditor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProgressDialog progressDialog= new ProgressDialog(EditorLogin.this);
+                progressDialog.setTitle("Verifying the password");
+                progressDialog.show();
                 user= username.getText().toString();
                 DocumentReference documentReference= fstore.collection("editors").document(username.getText().toString());
                 documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -49,7 +53,7 @@ public class EditorLogin extends AppCompatActivity {
                         if (documentSnapshot.exists()) {
                             if (password.getText().toString().contains(documentSnapshot.getString("password"))) {
                                 Toast.makeText(EditorLogin.this, "Logged in!!!", Toast.LENGTH_SHORT).show();
-
+                                progressDialog.dismiss();
                                 @SuppressLint("WrongConstant") SharedPreferences sh
                                         = getSharedPreferences("MySharedPref", MODE_APPEND);
                                 SharedPreferences.Editor myEdit
@@ -61,10 +65,12 @@ public class EditorLogin extends AppCompatActivity {
                                 startActivity(new Intent(EditorLogin.this, EditorPage.class));
                             } else {
                                 Toast.makeText(EditorLogin.this, "WRONG PASSWORD", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
                             }
                         }
                         else {
                             Toast.makeText(EditorLogin.this, "user doesn't exist" , Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {

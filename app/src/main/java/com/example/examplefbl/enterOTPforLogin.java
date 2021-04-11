@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -57,6 +58,9 @@ public class enterOTPforLogin extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProgressDialog progressDialog= new ProgressDialog(enterOTPforLogin.this);
+                progressDialog.setTitle("Verifying the OTP");
+                progressDialog.show();
                 verifySignInCode();
             }
         });
@@ -80,6 +84,7 @@ public class enterOTPforLogin extends AppCompatActivity {
                             //here you can open new activity
                             Toast.makeText(getApplicationContext(),
                                     "Login Successful", Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
 
 
                             Toast.makeText(enterOTPforLogin.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();

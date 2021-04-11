@@ -2,6 +2,7 @@ package com.example.examplefbl;
 
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,25 +17,28 @@ public class intro extends AppIntro {
         public void onCreate (Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
+            getSupportActionBar().hide();
         if (SaveSharedPreference.getLoggedStatus(getApplicationContext()))
         {
             Intent intent= new Intent(getApplicationContext(), loginOrRegister.class);
             startActivity(intent);
         }
 
+        new AlertDialog.Builder(this).setTitle("An app by Team Kurtoziz")
+                .setMessage("")
+                .setNeutralButton("Ok", null).show();
+
         addSlide(AppIntroFragment.newInstance(
                 "Welcome...",
-                "We are really thankful for you to download this app. You can either skip this intro or bother" +
-                        " yourself for this lol!"
+                "Become a certified editor and publish your own articles! ",R.drawable.pic1
         ));
         addSlide(AppIntroFragment.newInstance(
                 "...Let's get started!",
-                "Well! You can buy or sell stuff using this app! Very nycccc great success!!!"
+                "Login either as a student or an editor",R.drawable.pic2
         ));
         addSlide(AppIntroFragment.newInstance(
-                "Last slide lmaoo",
-                "You're all done!! Now you can either login or" +
-                        " create an account if you're new ehehe)"
+                "Last slide wooohoo",
+                "Access all the latest news!!!",R.drawable.pic3
         ));
     }
 

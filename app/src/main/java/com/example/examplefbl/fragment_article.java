@@ -2,6 +2,7 @@ package com.example.examplefbl;
 
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,6 +48,11 @@ public class fragment_article extends Fragment {
         dataholder = new ArrayList<>();
         fstore= FirebaseFirestore.getInstance();
 
+        Toast.makeText(getContext(), "Scroll down for more!", Toast.LENGTH_SHORT).show();
+        ProgressDialog progressDialog= new ProgressDialog(getContext());
+        progressDialog.setTitle("Loading, just a moment..");
+        progressDialog.setMessage("This won't take a lot of time");
+        progressDialog.show();
         @SuppressLint("WrongConstant") SharedPreferences sh
                 = getActivity().getSharedPreferences("MySharedPref", MODE_APPEND);
         final String userr = sh.getString("username", "");
@@ -61,7 +67,7 @@ public class fragment_article extends Fragment {
                             datamodel obj= new datamodel(R.drawable.testimg,querySnapshot.getString("heading"),querySnapshot.getString("article"), querySnapshot.getString("imageCode"));
                             dataholder.add((obj));
                         }
-
+                        progressDialog.dismiss();
                         adapter= new MyRecyclerViewAdapter(getContext(), dataholder);
                         recyclerview.setAdapter(adapter);
                     }

@@ -54,10 +54,12 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_home2,container,false);
 
+
         @SuppressLint("WrongConstant") SharedPreferences sh
                 = getActivity().getSharedPreferences("MySharedPref", MODE_APPEND);
         final String userr = sh.getString("username", "");
 
+        Toast.makeText(getContext(), "Scroll down for more!", Toast.LENGTH_SHORT).show();
         article= view.findViewById(R.id.article);
         submitArticle= view.findViewById(R.id.submit_article);
         fstore= FirebaseFirestore.getInstance();

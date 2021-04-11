@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -54,4 +57,18 @@ public class afterLogin extends AppCompatActivity {
                     return true;
                 }
             };
+    public void onBackPressed() {
+        new AlertDialog.Builder(afterLogin.this)
+                .setTitle("EXIT?")
+                .setMessage("Do you want to leave?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent a = new Intent(Intent.ACTION_MAIN);
+                        a.addCategory(Intent.CATEGORY_HOME);
+                        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(a);
+                    }
+                }).setNegativeButton("NO", null).show();
+    }
 }
