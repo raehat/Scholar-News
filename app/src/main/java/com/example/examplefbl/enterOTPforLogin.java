@@ -31,7 +31,6 @@ public class enterOTPforLogin extends AppCompatActivity {
     String phone1;
     PinView kk;
     FirebaseAuth mAuth;
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +57,6 @@ public class enterOTPforLogin extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProgressDialog progressDialog= new ProgressDialog(enterOTPforLogin.this);
-                progressDialog.setTitle("Verifying the OTP");
-                progressDialog.show();
                 verifySignInCode();
             }
         });
@@ -84,7 +80,6 @@ public class enterOTPforLogin extends AppCompatActivity {
                             //here you can open new activity
                             Toast.makeText(getApplicationContext(),
                                     "Login Successful", Toast.LENGTH_LONG).show();
-                            progressDialog.dismiss();
 
 
                             Toast.makeText(enterOTPforLogin.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
